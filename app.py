@@ -11,7 +11,7 @@ import tempfile  # Import tempfile for temporary directories
 
 # Load environment variables from .env file
 load_dotenv()
-api_key = st.secrets["OPENAI_API_KEY"]
+api_key = st.secrets["claude_api_key"]
 
 # Initialize OpenAI client
 client = anthropic.Anthropic(api_key=api_key)
