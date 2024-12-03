@@ -197,7 +197,7 @@ if uploaded_file and api_key:
         st.session_state.responses.append({"role": "user", "content": user_query})
         with st.spinner("Analyzing data..."):
             # Process user input and provide response
-            response = chunk_api_requests(st.session_state.encoded_images, user_query, api_key)
+            response = chunk_api_requests(st.session_state.encoded_images, user_query, client)
 
         with st.chat_message('user'):
             st.markdown(user_query)
