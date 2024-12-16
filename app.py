@@ -94,7 +94,7 @@ def chunk_api_requests(encoded_images, user_query, client):
                         },
                         {
                             "type": "text",
-                            "text": user_query  # The user query associated with the image
+                            "text": f"""Analyze the construction document (blueprints, plans, specs) for costs, timeline, phases, dimensions, materials, MEP details (HVAC, electrical, plumbing), drainage, erosion control, and safety systems, and tell about: {user_query}"""  # The user query associated with the image
                         }
                     ],
                 }
