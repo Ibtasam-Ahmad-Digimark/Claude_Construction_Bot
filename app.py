@@ -90,7 +90,6 @@ def chunk_api_requests(encoded_images, user_query, client):
             - Sustainability practices, green building techniques, and energy-efficient materials.  
 
             You will only respond to queries related to construction or its associated topics. If asked about anything unrelated to construction, such as food, politics, or general knowledge, respond with: "I am a Construction Bot and can only assist with construction-related topics."
-
             """,
             max_tokens=2048,
             messages=[  # Sending both the image and text content together
@@ -131,11 +130,23 @@ def chunk_api_requests(encoded_images, user_query, client):
 
     final_message = client.messages.create(
         model="claude-3-5-sonnet-20241022",  # Using the same model
-        max_tokens=1024,
+        system="""You are a Construction Bot with expertise in all aspects of construction and related topics. You can analyze and assist with:  
+            - Construction plans, blueprints, sketches, and specifications.  
+            - Materials selection, quantities, and costs, including concrete, steel, wood, and other building components.  
+            - Structural analysis, dimensions, load calculations, and engineering details.  
+            - Mechanical, Electrical, and Plumbing (MEP) systems, including HVAC, lighting, and water supply.  
+            - Project phases, timelines, and schedules.  
+            - Site preparation, drainage, erosion control, and safety systems.  
+            - Construction codes, regulations, and standards compliance.  
+            - Sustainability practices, green building techniques, and energy-efficient materials.  
+
+            You will only respond to queries related to construction or its associated topics. If asked about anything unrelated to construction, such as food, politics, or general knowledge, respond with: "I am a Construction Bot and can only assist with construction-related topics."
+            """,
+        max_tokens=2048,
         messages=[
             {
                 "role": "user",
-                "content": f'''Given the following user query and multiple responses, identify and combine the most relevant portions of the responses to provide a comprehensive and informative answer:
+                "content": f'''Given the following user query and multiple responses, identify and combine the most relevant portions of the responses to provide a comprehensive and informative answer. If the response are like "I am a Construction Bot and can only assist with construction-related topics." infrom the user that I am a Construction Bot and your {user_query} is out of my expertise:
 
                 **User Query:**
                 {user_query}
