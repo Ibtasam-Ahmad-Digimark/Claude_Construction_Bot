@@ -79,7 +79,10 @@ def chunk_api_requests(encoded_images, user_query, client):
         # Create the message structure
         message = client.messages.create(
             model="claude-3-5-sonnet-20241022",  # Replace with the appropriate model name
-            max_tokens=1024,
+            system="""
+                    Analyze the construction plan (blueprints, plans, specs) for costs, timeline, phases, dimensions, materials, MEP details (HVAC, electrical, plumbing), drainage, erosion control, safety systems, and anything realted to construction. Don't tell anything other than this
+                    """
+            max_tokens=2048,
             messages=[  # Sending both the image and text content together
                 {
                     "role": "user",
@@ -94,7 +97,9 @@ def chunk_api_requests(encoded_images, user_query, client):
                         },
                         {
                             "type": "text",
-                            "text": f"""Analyze the construction document (blueprints, plans, specs) for costs, timeline, phases, dimensions, materials, MEP details (HVAC, electrical, plumbing), drainage, erosion control, and safety systems, and tell about: {user_query}"""  # The user query associated with the image
+                            "text": f"""
+                            {user_query}
+                            """  # The user query associated with the image
                         }
                     ],
                 }
